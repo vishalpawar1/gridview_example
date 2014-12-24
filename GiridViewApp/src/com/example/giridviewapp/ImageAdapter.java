@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
+import android.widget.ImageView;
 
 public class ImageAdapter extends BaseAdapter {
 private Context mContext;
@@ -13,8 +15,8 @@ private Context mContext;
 	}
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return  mThumbIds.length;
+		
 	}
 
 	@Override
@@ -30,9 +32,21 @@ private Context mContext;
 	}
 
 	@Override
-	public View getView(int arg0, View arg1, ViewGroup arg2) {
-		// TODO Auto-generated method stub
-		return null;
+	public View getView(int position, View convertView, ViewGroup parent) {
+		
+		ImageView imageview;
+		if(convertView == null){
+			imageview=new ImageView(mContext);
+			imageview.setLayoutParams(new GridView.LayoutParams(150,150));
+			imageview.setScaleType(ImageView.ScaleType.CENTER_CROP);
+			imageview.setPadding(5, 5, 5, 5);
+		}
+		else{
+			imageview=(ImageView) convertView;
+		}
+		imageview.setImageResource(mThumbIds[position]);
+		
+		return imageview;
 	}
 
 	public Integer[] mThumbIds = {
